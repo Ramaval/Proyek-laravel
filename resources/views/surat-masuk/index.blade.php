@@ -1,11 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>surat masuk</title>
-</head>
-<body>
+@extends('layouts.app')
+@section('title','Halaman surat masuk')
+@section('content')
     <h1>Halaman Surat Masuk</h1>
     <table border='1' cellpadding='10'>
         <thead>
@@ -22,6 +17,9 @@
                 <th>
                     perihal
                 </th>
+                <th>
+                    aksi
+                </th>
             </tr>
 
         </thead>
@@ -33,11 +31,10 @@
                 <td>{{$surat['pengirim']}}</td>
                 <td>{{$surat['perihal']}}</td>
                 <td>
-                    <a href="{{ route('surat-masuk.show', $surat[$id]) }}">detail surat</a>
+                    <a href="{{ route('surat-masuk.show', $surat['id']) }}">detail surat</a>
                 </td>
             </tr>
             @endforeach
         </tbody>
     </table>
-</body>
-</html>
+@endsection
