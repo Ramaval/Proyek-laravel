@@ -18,23 +18,33 @@
                     perihal
                 </th>
                 <th>
+                    Keterangan
+                </th>
+                <th>
                     aksi
                 </th>
             </tr>
 
         </thead>
         <tbody>
-            @foreach($suratKeluar as $surat)
+            @forelse($suratKeluar
+            
+            as $surat)
             <tr>
                 <td> {{$loop->iteration}}</td>
-                <td> {{$surat['tanggal']}}</td>
-                <td> {{$surat['pengirim']}}</td>
-                <td> {{$surat['perihal']}}</td>
+                <td> {{$surat->tanggal}}</td>
+                <td> {{$surat->pengirim}}</td>
+                <td> {{$surat->perihal}}</td>
+                <td>{{$surat->keteranga}}</td>
                 <td>
-                    <a href="{{ route('surat-keluar.show', $surat['id']) }}">detail surat</a>
+                    <a href="{{ route('surat-keluar.show', $surat->id) }}">detail surat</a>
                 </td>
             </tr>
-            @endforeach
+            @empty
+            <tr>
+                <td> belum ada surat masuk </td>
+            </tr>
+            @endforelse
         </tbody>
     </table>
 @endsection

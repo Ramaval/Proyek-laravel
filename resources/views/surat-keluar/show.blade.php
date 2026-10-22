@@ -5,24 +5,24 @@
 @if ($surat)
     <p>
         <strong>id surat :</strong>
-        {{$surat['id']}}
+        {{$surat->id}}
     </p>
         <p>
         <strong>NO surat :</strong>
-        {{$surat['nomor_surat']}}
+        {{$surat->nomor_surat}}
     </p>
         <p>
         <strong>tanggal pengiriman :</strong>
-        {{$surat['tanggal']}}
+        {{$surat->tanggal}}
     </p>
         <p>
         <strong>perihal:</strong>
-        {{$surat['perihal']}}
+        {{$surat->perihal}}
     </p>
     
     <p>
         <strong>pengirim surat :</strong>
-        {{$surat['pengirim']}}
+        {{$surat->pengirim}}
     </p>
 @else 
     <p>surat tidak di temukan </p>
