@@ -2,7 +2,6 @@
 @section('title','Halaman surat masuk')
 @section('content')
     <h1> Dtail Surat masuk </h1>
-@if ($surat)
     <p>
         <strong>id surat :</strong>
         {{$surat->id}}
@@ -24,8 +23,9 @@
         <strong>pengirim surat :</strong>
         {{$surat->pengirim}}
     </p>
-@else 
-    <p>surat tidak di temukan </p>
-@endif
+    <p>
+        <Strong>Keterangan : </Strong>
+        {{$surat->keterangan ?? '-'}}
+    </p>
     <a href="{{ route('surat-masuk.index') }}">kembali</a>
 @endsection

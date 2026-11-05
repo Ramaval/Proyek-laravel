@@ -24,8 +24,15 @@ Route::get('/', function () {
 // cek name route
 // php artisan route:list
 
-Route::get('/surat-masuk', [SuratMasukController::class, 'index'])->name('surat-masuk.index');
-Route::get('/surat-masuk/{id}', [SuratMasukController::class, 'show'])->name('surat-masuk.show');
+// Route::get('/surat-masuk', [SuratMasukController::class, 'index'])->name('surat-masuk.index');
+// Route::get('/surat-masuk/{id}', [SuratMasukController::class, 'show'])->name('surat-masuk.show');
+
+Route ::get('/',function(){
+    return view('dashboard');
+}
+)->name('dashboard');
+
+Route::resource('surat-masuk', SuratMasukController::class)->parameters(['surat-masuk' => 'id']);
 
 Route::get('/surat-keluar/{id}',[SuratKeluarController::class, 'show'])->name('surat-keluar.show');
 Route::get('/surat-keluar',[SuratKeluarController::class, 'index'])->name('surat-keluar.index');

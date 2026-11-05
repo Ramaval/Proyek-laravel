@@ -24,6 +24,11 @@
         <strong>pengirim surat :</strong>
         {{$surat->pengirim}}
     </p>
+    <p>
+        <p>Keterangan : 
+            {{ $surat->keterangan ?? '-' }}</p>
+
+    </p>
 @else 
     <p>surat tidak di temukan </p>
 @endif

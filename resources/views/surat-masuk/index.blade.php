@@ -36,13 +36,19 @@
                 <td>{{$surat->keterangan}}</td>
                 <td>
                     <a href="{{ route('surat-masuk.show', $surat->id) }}">detail surat</a>
-                </td>
-            </tr>
-            @empty
-            <tr>
-                <td>belum ada surat masuk</td>
-            </tr>
-            @endforelse
-        </tbody>
-    </table>
+               <a href="{{ route('surat-masuk.edit', $surat->id) }}">Edit</a> | 
+                <form action="{{ route('surat-masuk.destroy', $surat->id) }}" method="POST" style="display: inline">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" onclick="return confirm('Hapus surat ini?')">Hapus</button>
+                </form>
+            </td>
+        </tr>
+        @empty
+        <tr>
+            <td colspan="6">Belum ada surat masuk.</td>
+        </tr>
+        @endforelse
+    </tbody>
+</table>
 @endsection
