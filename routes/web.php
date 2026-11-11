@@ -1,38 +1,55 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\SuratMasukController;
-use App\Http\Controllers\SuratKeluarController;
+use App\Http\Controllers\SuratKeluarController; // Import ini jika ada Surat Keluar
 
-Route::get('/', function () {
-    return view('dashboard');
-}) ->name('dashboard');
+/*
+|--------------------------------------------------------------------------
+| 1. Route Khusus Guest (Pengguna yang Belum Login)
+|--------------------------------------------------------------------------
+*/
+Route::middleware('guest')->group(function () {
+    Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
+    Route::post('/login', [LoginController::class, 'login'])->name('login.submit');
+});
 
+/*
+|--------------------------------------------------------------------------
+| 2. Route Khusus Auth (Pengguna yang Sudah Login)
+|--------------------------------------------------------------------------
+*/
+Route::middleware('auth')->group(function () {
+    
+    // Halaman Utama & Logout
+    Route::get('/', function () {
+        return view('dashboard');
+    })->name('dashboard');
+    
+    Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
-// //  route sederhana 
-// Route::get('/surat-masuk', function () {
-//     return 'halaman surat masuk';
-// });
-// //  route dengan parameter
-// Route::get('/surat-masuk/{id}', function ($id) {
-//     return 'dtail halamman surat masuk dengan id : '.$id;
-// });
-// // penaaman route
-// Route::get('/surat-masuk/{id}', function ($id) {
-//     return 'dtail halamman surat masuk dengan id : '.$id;
-// })->name('surat-masuk.show');
-// cek name route
-// php artisan route:list
+    // --- FITUR SURAT MASUK ---
+    // A. Akses Baca (Semua user yang login: Pembaca & Petugas)
+    Route::resource('surat-masuk', SuratMasukController::class)
+        ->only(['index', 'show'])
+        ->parameters(['surat-masuk' => 'id']);
 
-// Route::get('/surat-masuk', [SuratMasukController::class, 'index'])->name('surat-masuk.index');
-// Route::get('/surat-masuk/{id}', [SuratMasukController::class, 'show'])->name('surat-masuk.show');
+    // B. Akses Kelola/Tulis (Khusus Petugas)
+    Route::resource('surat-masuk', SuratMasukController::class)
+        ->except(['index', 'show'])
+        ->parameters(['surat-masuk' => 'id'])
+        ->middleware('can:manage-letters');
 
-Route ::get('/',function(){
-    return view('dashboard');
-}
-)->name('dashboard');
+    // --- FITUR SURAT KELUAR (Jika ada dari P4) ---
+    // A. Akses Baca
+    Route::resource('surat-keluar', SuratKeluarController::class)
+        ->only(['index', 'show'])
+        ->parameters(['surat-keluar' => 'id']);
 
-Route::resource('surat-masuk', SuratMasukController::class)->parameters(['surat-masuk' => 'id']);
-
-Route::get('/surat-keluar/{id}',[SuratKeluarController::class, 'show'])->name('surat-keluar.show');
-Route::get('/surat-keluar',[SuratKeluarController::class, 'index'])->name('surat-keluar.index');
+    // B. Akses Kelola/Tulis (Khusus Petugas)
+    Route::resource('surat-keluar', SuratKeluarController::class)
+        ->except(['index', 'show'])
+        ->parameters(['surat-keluar' => 'id'])
+        ->middleware('can:manage-letters');
+});
