@@ -1,36 +1,60 @@
 @extends('layouts.app')
-@section('title','Halaman surat Keluar')
-@section('content')
-    <h1> Dtail Surat Keluar </h1>
-@if ($surat)
-    <p>
-        <strong>id surat :</strong>
-        {{$surat->id}}
-    </p>
-        <p>
-        <strong>NO surat :</strong>
-        {{$surat->nomor_surat}}
-    </p>
-        <p>
-        <strong>tanggal pengiriman :</strong>
-        {{$surat->tanggal}}
-    </p>
-        <p>
-        <strong>perihal:</strong>
-        {{$surat->perihal}}
-    </p>
-    
-    <p>
-        <strong>pengirim surat :</strong>
-        {{$surat->pengirim}}
-    </p>
-    <p>
-        <p>Keterangan : 
-            {{ $surat->keterangan ?? '-' }}</p>
 
-    </p>
-@else 
-    <p>surat tidak di temukan </p>
-@endif
-    <a href="{{ route('surat-keluar.index') }}">kembali</a>
+@section('title', 'Detail Surat Keluar')
+
+@section('content')
+<div class="max-w-2xl mx-auto space-y-6">
+    <div class="flex items-center justify-between">
+        <div>
+            <h1 class="text-2xl font-bold text-white">Detail Surat Keluar</h1>
+            <p class="text-xs text-rose-300/80 mt-1">Informasi lengkap arsip surat keluar.</p>
+        </div>
+        <a href="{{ route('surat-keluar.index') }}" class="btn-secondary">&larr; Kembali</a>
+    </div>
+
+    <div class="surat-card">
+        <div class="detail-row">
+            <span class="detail-label">Nomor Surat</span>
+            <span class="detail-value">{{ $surat->nomor_surat ?? '-' }}</span>
+        </div>
+        <div class="detail-row">
+            <span class="detail-label">Tanggal Surat</span>
+            <span class="detail-value">{{ $surat->tanggal }}</span>
+        </div>
+        <div class="detail-row">
+            <span class="detail-label">Tujuan</span>
+            <span class="detail-value">{{ $surat->pengirim ?? $surat->pengirim }}</span>
+        </div>
+        <div class="detail-row">
+            <span class="detail-label">Perihal</span>
+            <span class="detail-value">{{ $surat->perihal }}</span>
+        </div>
+        <div class="detail-row">
+            <span class="detail-label">Kategori</span>
+            <span class="detail-value text-amber-300">{{ $surat->category?->nama ?? 'Tanpa kategori' }}</span>
+        </div>
+        <div class="detail-row">
+            <span class="detail-label">Lampiran</span>
+            <span class="detail-value">
+                @if ($surat->lampiran)
+                    <a href="{{ asset('storage/' . $surat->lampiran) }}" target="_blank" rel="noopener" class="text-amber-400 hover:text-amber-300 underline">
+                        Lihat Lampiran &nearr;
+                    </a>
+                @else
+                    <span class="text-rose-300/50">Tidak ada lampiran</span>
+                @endif
+            </span>
+        </div>
+        <div class="detail-row border-b-0">
+            <span class="detail-label">Keterangan</span>
+            <span class="detail-value text-rose-200/80">{{ $surat->keterangan ?? '-' }}</span>
+        </div>
+
+        @can('manage-letters')
+            <div class="mt-6 pt-4 border-t border-rose-900/40 flex justify-end gap-3">
+                <a href="{{ route('surat-keluar.edit', $surat->id) }}" class="btn-gold">Edit Surat</a>
+            </div>
+        @endcan
+    </div>
+</div>
 @endsection

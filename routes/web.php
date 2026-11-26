@@ -29,27 +29,30 @@ Route::middleware('auth')->group(function () {
     
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
-    // --- FITUR SURAT MASUK ---
-    // A. Akses Baca (Semua user yang login: Pembaca & Petugas)
-    Route::resource('surat-masuk', SuratMasukController::class)
-        ->only(['index', 'show'])
-        ->parameters(['surat-masuk' => 'id']);
 
-    // B. Akses Kelola/Tulis (Khusus Petugas)
+    // --- FITUR SURAT MASUK ---
+ // B. Akses Kelola/Tulis (Khusus Petugas)
     Route::resource('surat-masuk', SuratMasukController::class)
         ->except(['index', 'show'])
         ->parameters(['surat-masuk' => 'id'])
         ->middleware('can:manage-letters');
 
+    // A. Akses Baca (Semua user yang login: Pembaca & Petugas)
+    Route::resource('surat-masuk', SuratMasukController::class)
+        ->only(['index', 'show'])
+        ->parameters(['surat-masuk' => 'id']);
+
+
     // --- FITUR SURAT KELUAR (Jika ada dari P4) ---
+    Route::resource('surat-keluar', SuratKeluarController::class)
+        ->except(['index', 'show'])
+        ->parameters(['surat-keluar' => 'id'])
+        ->middleware('can:manage-letters');
+        
     // A. Akses Baca
     Route::resource('surat-keluar', SuratKeluarController::class)
         ->only(['index', 'show'])
         ->parameters(['surat-keluar' => 'id']);
 
-    // B. Akses Kelola/Tulis (Khusus Petugas)
-    Route::resource('surat-keluar', SuratKeluarController::class)
-        ->except(['index', 'show'])
-        ->parameters(['surat-keluar' => 'id'])
-        ->middleware('can:manage-letters');
+    
 });

@@ -1,0 +1,63 @@
+@reference "tailwindcss";
+
+@layer components {
+    /* Card Pembungkus Utama */
+    .surat-card {
+        @apply bg-[#2d0307] border border-rose-900/40 rounded-xl p-6 shadow-lg;
+    }
+
+    /* Tombol Utama & Navigasi */
+    .btn-gold {
+        @apply bg-amber-500 hover:bg-amber-400 active:bg-amber-600 text-rose-950 font-semibold px-4 py-2 rounded-lg text-sm transition duration-200 inline-flex items-center gap-2 cursor-pointer;
+    }
+    .btn-secondary {
+        @apply bg-rose-950/80 hover:bg-rose-900 text-rose-200 border border-rose-800/60 font-medium px-4 py-2 rounded-lg text-sm transition duration-200 inline-flex items-center gap-2;
+    }
+
+    /* Tombol Aksi Kecil di dalam Tabel */
+    .btn-aksi-detail {
+        @apply bg-rose-900/60 hover:bg-rose-800 text-rose-100 border border-rose-700/50 px-2.5 py-1 rounded text-xs font-medium transition;
+    }
+    .btn-aksi-edit {
+        @apply bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/30 px-2.5 py-1 rounded text-xs font-medium transition;
+    }
+    .btn-aksi-hapus {
+        @apply bg-red-600/20 hover:bg-red-600/40 text-red-300 border border-red-500/30 px-2.5 py-1 rounded text-xs font-medium transition cursor-pointer;
+    }
+
+    /* Tabel Data Surat */
+    .surat-table {
+        @apply w-full text-left border-collapse text-sm;
+    }
+    .surat-table thead {
+        @apply bg-[#3b060c] text-amber-300 uppercase text-xs tracking-wider border-b border-rose-900/50;
+    }
+    .surat-table th, .surat-table td {
+        @apply px-4 py-3.5 border-b border-rose-900/30;
+    }
+    .surat-table tbody tr {
+        @apply hover:bg-rose-950/50 transition duration-150;
+    }
+
+    /* Form Input (Create & Edit) */
+    .surat-label {
+        @apply block text-xs font-semibold text-rose-200 uppercase tracking-wider mb-1.5;
+    }
+    .surat-input {
+        @apply w-full bg-[#1a0507] border border-rose-900/60 rounded-lg px-3.5 py-2.5 text-sm text-gray-100 placeholder-rose-400/30 focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400 transition;
+    }
+    .surat-error {
+        @apply text-xs text-rose-400 mt-1;
+    }
+
+    /* Baris Info Halaman Detail (Show) */
+    .detail-row {
+        @apply py-3 border-b border-rose-900/30 flex flex-col sm:flex-row sm:justify-between gap-1;
+    }
+    .detail-label {
+        @apply text-xs font-semibold text-rose-300/80 uppercase tracking-wider;
+    }
+    .detail-value {
+        @apply text-sm text-white font-medium;
+    }
+}

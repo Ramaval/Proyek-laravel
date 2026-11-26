@@ -1,0 +1,44 @@
+@reference "tailwindcss";
+
+@layer components {
+    /* Background layar penuh & posisi card di tengah */
+    .login-wrapper {
+        @apply min-h-screen bg-[#1a0507] text-gray-100 flex items-center justify-center p-4 relative overflow-hidden;
+    }
+
+    /* Efek cahaya pendar halus di belakang card */
+    .login-glow {
+        @apply absolute w-96 h-96 bg-rose-900/20 rounded-full blur-3xl pointer-events-none;
+    }
+
+    /* Kotak Card Login */
+    .login-card {
+        @apply w-full max-w-md bg-[#2d0307] border border-rose-900/50 rounded-2xl p-8 shadow-2xl relative z-10;
+    }
+
+    /* Judul & Subjudul */
+    .login-title {
+        @apply text-2xl font-bold text-center bg-gradient-to-r from-amber-400 to-rose-400 bg-clip-text text-transparent;
+    }
+    .login-subtitle {
+        @apply text-xs text-rose-300/80 text-center mt-1 mb-6;
+    }
+
+    /* Input & Label Khusus Login */
+    .login-label {
+        @apply block text-xs font-semibold text-rose-200 uppercase tracking-wider mb-1.5;
+    }
+    .login-input {
+        @apply w-full bg-[#1a0507] border border-rose-900/60 rounded-lg px-4 py-2.5 text-sm text-gray-100 placeholder-rose-400/30 focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400 transition;
+    }
+
+    /* Pesan Error Validasi */
+    .login-error {
+        @apply text-xs text-rose-400 mt-1.5 flex items-center gap-1;
+    }
+
+    /* Tombol Submit */
+    .login-btn {
+        @apply w-full bg-amber-500 hover:bg-amber-400 active:bg-amber-600 text-rose-950 font-bold py-2.5 px-4 rounded-lg text-sm transition duration-200 shadow-lg shadow-amber-500/10 cursor-pointer mt-2;
+    }
+}

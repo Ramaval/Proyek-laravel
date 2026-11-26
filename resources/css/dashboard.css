@@ -1,0 +1,42 @@
+@reference "tailwindcss";
+
+
+@layer components {
+    /* Kerangka Utama Layar */
+    .app-body {
+        @apply bg-[#1a0507] text-gray-100 min-h-screen flex antialiased;
+    }
+
+    /* Sidebar Kiri */
+    .sidebar {
+        @apply w-64 bg-[#35050a] border-r border-rose-900/40 flex flex-col justify-between shrink-0;
+    }
+    .sidebar-brand {
+        @apply text-2xl font-bold bg-gradient-to-r from-amber-400 to-rose-400 bg-clip-text text-transparent;
+    }
+    .nav-item {
+        @apply flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-rose-100 hover:bg-[#4a0810] hover:text-white transition duration-200;
+    }
+    .nav-item-active {
+        @apply flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium bg-[#5a0c15] text-amber-300 border-l-4 border-amber-400 pl-2 transition duration-200;
+    }
+
+    /* Area Konten Kanan */
+    .main-wrapper {
+        @apply flex-1 flex flex-col min-w-0;
+    }
+    .topbar {
+        @apply h-16 bg-[#2d0307]/60 backdrop-blur-md border-b border-rose-900/30 flex items-center justify-between px-8 shrink-0;
+    }
+    .main-content {
+        @apply flex-grow p-8 overflow-y-auto;
+    }
+    .app-footer {
+        @apply h-12 bg-[#2d0307]/30 border-t border-rose-900/20 flex items-center justify-center text-xs text-rose-400/50;
+    }
+
+    /* Kartu Stat Dashboard */
+    .stat-card {
+        @apply bg-[#2d0307] border border-rose-900/40 p-6 rounded-xl relative overflow-hidden hover:border-amber-500/40 transition duration-300 shadow-lg;
+    }
+}
